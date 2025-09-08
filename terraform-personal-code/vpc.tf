@@ -8,9 +8,9 @@ module "vpc" {
   public_subnets  = local.public_subnets
   private_subnets = local.private_subnets
 
-  enable_nat_gateway   = true
-  single_nat_gateway   = true
-  one_nat_gateway_per_az = false
+  enable_nat_gateway      = true
+  single_nat_gateway      = true
+  one_nat_gateway_per_az  = false
 
   enable_flow_log         = true
   create_flow_log_cloudwatch_log_group = true
@@ -19,6 +19,7 @@ module "vpc" {
   flow_log_log_group_name = "/aws/vpc/flow-logs"
   flow_log_log_group_retention_in_days = 7
 
+  flow_log_traffic_type   = "ALL"
 
   public_subnet_tags = {
     "kubernetes.io/role/elb" = "1"
@@ -31,6 +32,5 @@ module "vpc" {
   }
 
   map_public_ip_on_launch = true
-  enable_flow_log         = true
   tags                    = local.tags
 }
